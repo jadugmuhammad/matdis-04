@@ -1,0 +1,4 @@
+metode,jarak_km,penghematan_vs_nn_km,penghematan_vs_nn_persen,selisih_vs_optimal_persen,waktu_ms,kota_perantara
+Nearest Neighbor,2043.63,0.0,0.0,35.02,0.083,7
+Nearest Neighbor + 2-opt,1635.72,407.91,19.96,8.07,22.621,0
+Optimal global (ILP),1513.58,530.05,25.94,0.0,132.41,0

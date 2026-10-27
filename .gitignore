@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Lingkungan virtual
+.venv/
+venv/
+env/
+
+# Editor dan sistem operasi
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Cache geometri jalan dari OSRM (dibuat oleh main.py --geometri-osrm)
+data/cache_osrm/

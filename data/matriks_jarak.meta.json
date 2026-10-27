@@ -1,0 +1,8 @@
+{
+  "sumber": "OSRM Table API",
+  "server": "https://router.project-osrm.org",
+  "profil": "driving",
+  "diambil_pada": "2026-10-24T08:50:25+07:00",
+  "berkas_koordinat": "data/koordinat.csv",
+  "jumlah_kota": 36
+}

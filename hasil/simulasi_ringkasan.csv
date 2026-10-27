@@ -1,0 +1,15 @@
+besaran,nilai
+seed,42
+nn,2043.63
+nn_2opt,1635.72
+eksak,1513.58
+rute_acak_min,3939.92
+rute_acak_median,5296.32
+rute_acak_rata2,5290.37
+rute_acak_maks,6559.09
+rute_acak_lebih_baik_dari_nn,0.0
+multistart_min,1513.58
+multistart_median,1573.19
+multistart_maks,1747.91
+multistart_capai_optimal,12.0
+multistart_ulang,200.0
