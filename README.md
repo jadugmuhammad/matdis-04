@@ -1,18 +1,8 @@
-# Optimasi Rute Semarang–Jakarta melalui 35 Ibu Kota Jawa Tengah
+\*# Optimasi Rute Semarang-Jakarta melalui Semua Kota/Kabupaten di Jawa Tengah
 
 Program Python untuk mencari urutan kunjungan terpendek dari Kota Semarang ke Jakarta, dengan syarat seluruh 35 ibu kota kabupaten/kota di Jawa Tengah dikunjungi lebih dulu. Masalah ini adalah Traveling Salesman Problem (TSP) berarah dengan titik awal dan titik akhir yang sudah ditentukan. Dibuat sebagai tugas Teori Graf / Matematika Diskrit.
 
 Jarak antarkota berasal dari jaringan jalan nyata (OSRM), bukan garis lurus. Matriksnya asimetris, sehingga grafnya berarah.
-
-## Hasil
-
-| Metode | Jarak (km) | Hemat vs NN | Selisih dari optimal |
-|---|---:|---:|---:|
-| Nearest Neighbor (NN) | 2.043,63 | 0 % | 35,02 % |
-| NN + 2-opt | 1.635,72 | 19,96 % | 8,07 % |
-| Optimal global (ILP) | 1.513,58 | 25,94 % | 0 % |
-
-Angka di atas dihitung dari `data/matriks_jarak.csv`. Berkas rute lengkap ada di folder `hasil/`.
 
 ## Struktur repositori
 
@@ -36,12 +26,32 @@ Angka di atas dihitung dari `data/matriks_jarak.csv`. Berkas rute lengkap ada di
 
 ## Persyaratan
 
-Python 3.11 atau lebih baru.
+1. Pastikan Python 3.11 atau yang lebih baru sudah terpasang.
+
+2. Lakukan clone atau download repositori ini.
+
+3. Saat pertama kali setelah melakukan clone atau download, masih belum ada folder `.venv`, maka jalankan perintah di bawah ini. Ini hanya dijalankan satu kali saja di awal.
 
 ```bash
+# Untuk macOS dan Linux
 python -m venv .venv
-source .venv/bin/activate        # Windows: .venv\Scripts\activate
+source .venv/bin/activate
 pip install -r requirements.txt
+
+# Untuk Windows (PowerShell)
+py -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+4. Sebelum program dijalankan, pastikan `.venv ` sudah aktif, yang ditandai dengan tulisan `(.venv)` di bagian paling kiri terminal.
+
+```bash
+# Untuk macOS dan Linux
+source .venv/bin/activate
+
+# Untuk Windows (PowerShell)
+.venv\Scripts\activate
 ```
 
 ## Cara menjalankan
@@ -80,15 +90,27 @@ Satu permintaan memuat semua titik, jadi jumlah kota dibatasi `--max-table-size`
 
 ## Keluaran di folder `hasil/`
 
-| Berkas | Isi |
-|---|---|
-| `ringkasan.csv` | jarak, penghematan, selisih dari optimal, dan waktu tiap metode |
+| Berkas                                              | Isi                                                                   |
+| --------------------------------------------------- | --------------------------------------------------------------------- |
+| `ringkasan.csv`                                     | jarak, penghematan, selisih dari optimal, dan waktu tiap metode       |
 | `rute_nn.csv`, `rute_nn_2opt.csv`, `rute_eksak.csv` | urutan kunjungan, jarak per ruas, jarak kumulatif, kota yang dilewati |
-| `rute_*.png` | gambar rute (tanpa peta dasar, tidak butuh internet) |
-| `peta_rute.html` | peta interaktif dengan pilihan metode dan simulasi perjalanan |
-| `simulasi_*.png`, `simulasi_*.csv` | hasil percobaan di `simulasi.py` |
+| `rute_*.png`                                        | gambar rute (tanpa peta dasar, tidak butuh internet)                  |
+| `peta_rute.html`                                    | peta interaktif dengan pilihan metode dan simulasi perjalanan         |
+| `simulasi_*.png`, `simulasi_*.csv`                  | hasil percobaan di `simulasi.py`                                      |
 
-Buka `peta_rute.html` di peramban. Berkas ini memuat Leaflet dan ubin peta OpenStreetMap dari internet, jadi perlu koneksi.
+### Cara membuka peta rute
+
+`peta_rute.html` memuat Leaflet dan ubin peta OpenStreetMap dari internet, jadi perlu koneksi. Sebaiknya buka lewat server lokal, bukan dengan klik dua kali pada berkasnya. Jika dibuka langsung dari folder (alamat `file://`), peramban tidak mengirim asal halaman, dan server OpenStreetMap dapat menolak permintaan ubin sehingga petanya kosong.
+
+Dari folder utama repositori, jalankan:
+
+```bash
+python -m http.server 8000 --directory hasil
+```
+
+Lalu buka <http://localhost:8000/peta_rute.html> di browser. Jika port 8000 sudah dipakai, ganti angkanya, misalnya `8080`, dan sesuaikan alamatnya. Untuk menghentikan server, tekan `Ctrl + C` pada terminal.
+
+Perintah ini memakai modul bawaan Python, jadi tidak butuh pustaka tambahan.
 
 ## Cara kerja singkat
 
@@ -102,14 +124,3 @@ Buka `peta_rute.html` di peramban. Berkas ini memuat Leaflet dan ubin peta OpenS
 - `data/matriks_jarak.csv` diambil dari OSRM. Untuk memakai matriks lain, ganti berkas ini atau berikan jalurnya lewat `--matriks`. Nama baris dan kolom harus sama, dan harus memuat `Semarang` serta `Jakarta`.
 - `data/koordinat.csv` berisi titik pusat tiap kota di sekitar alun-alun. Koordinat ini dikirim ke OSRM saat memakai `--perbarui-matriks`, sehingga hasilnya ikut berubah jika koordinat diubah. Selama matriks dipakai apa adanya, koordinat hanya dipakai untuk menggambar peta.
 - Tanpa opsi tambahan, ruas pada peta digambar sebagai garis lurus antarkota. Opsi `python main.py --geometri-osrm` mengambil bentuk jalan dari server OSRM publik (butuh internet, sekitar satu detik per ruas, hasilnya disimpan di `data/cache_osrm/`). Ruas yang gagal diambil tetap digambar sebagai garis lurus.
-
-## Penulis
-
-- Nama: [ISI: nama lengkap]
-- NIM / kelas: [ISI: NIM dan kelas]
-- Mata kuliah: [ISI: nama mata kuliah dan semester]
-- Repositori: [ISI: URL repositori GitHub]
-
-## Lisensi
-
-[ISI: pilih lisensi, misalnya MIT, atau hapus bagian ini]
