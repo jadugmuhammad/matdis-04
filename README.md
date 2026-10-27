@@ -1,4 +1,4 @@
-\*# Optimasi Rute Semarang-Jakarta melalui Semua Kota/Kabupaten di Jawa Tengah
+# Optimasi Rute Semarang-Jakarta melalui Semua Kota/Kabupaten di Jawa Tengah
 
 Program Python untuk mencari urutan kunjungan terpendek dari Kota Semarang ke Jakarta, dengan syarat seluruh 35 ibu kota kabupaten/kota di Jawa Tengah dikunjungi lebih dulu. Masalah ini adalah Traveling Salesman Problem (TSP) berarah dengan titik awal dan titik akhir yang sudah ditentukan. Dibuat sebagai tugas Teori Graf / Matematika Diskrit.
 
